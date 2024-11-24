@@ -17,3 +17,34 @@
 
 # Section 2
 ## What is a Database Table?
+- A database consists of one or more tables.
+- Each table is made up of rows and columns.
+    1. Rows are record containing data points on an object
+    2. Columns contain data points (text, numbers, dates, etc...)
+- Each row or record should be uniquely identifiable using a Primary Key
+- Can also have Indexes or Alternative keys
+- Primary Keys and Indexes
+    1. A primary Key is a unique value
+    2. Primary key should never repeat
+    3. In SQL Server, we use `IDENTITY` to automatically generate Primary Key values.
+    4. Every Table should have a Primary Key, there are also some exceptions
+    5. Indexes are other unique values that a record can have. They can increase data lookup speed, but can reduce insert speed.
+
+## Create Entity Data Model
+- We can use a diagram to model our database in which we can sketch out the realtionships of one table to another.
+
+## Create a Database Table Using Management Studio
+- We can use UI to create a table, by right-clicking on the database table Directory and creating a new table.
+- We will be asked to Add the name of the Column, Type of the data that will be stored, and if the Null value is allowed.
+- To make a Column a primary key in UI we can right click on the column and choose the option Primary Key.
+- To make the key value auto increment, we can choose the Column Properties 'Identity Specification' to Yes, and it will also gives us the option by how many values we would like to increase the value. It will also give options Seed to where to start and how much to skip.
+- We can also set a Index on our Columns by right-click and adding the Indexes, where we can specify which Column we are targeting and if we want it to be unique.
+
+## What is SQL?
+- SQL is a standard language for storing, manipulating, and retrieving data in databases (Structured Query Langugae)
+- DDL (Data Definition Language)
+    1. Manipulates the database structure
+    2. CREATE, DROP, ALTER are a few commands that performs DDL operations.
+- DML (Data Manimulation Language)
+    1. Manipulate the data in the database
+    2. DELETE, UPDATE, INSER are a few commands that perform DML operations.
