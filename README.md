@@ -48,3 +48,22 @@
 - DML (Data Manimulation Language)
     1. Manipulate the data in the database
     2. DELETE, UPDATE, INSER are a few commands that perform DML operations.
+
+## Create a Database table using SQL script
+- First to begin with we are going to use the database, in this case it will be the database that we have already created. This should not be master.
+- Since we are creating a School Management Database, we are creating a Lecturer table using Script.
+- We are going to use the keyword `CREATE TABLE tableName` after this we open parantheses and in that we add `(columnName datatype constraints)`.
+- Here is the script: -
+```
+USE SchoolManagementDB;
+
+CREATE TABLE Lecturer
+(
+	Id INT PRIMARY KEY IDENTITY,
+	FirstName NVARCHAR(50) NOT NULL,
+	LastName NVARCHAR(50) NOT NULL,
+	DateOfBirth DATE,
+	StaffId NVARCHAR(10) NOT NULL UNIQUE
+);
+```
+We have created a table named Lecturer with Five columns. Id column represent that it is a type of an integer and also a PRIMARY KEY, but since we also want it to Auto Increment we added IDENTITY, if we want to pass the Valued to be added and seeds, we can open parantheses after it and pass those values. Then we created First Name and Last Name for which we used NVARCHAR data type with the maximum length of 50 characters, and aslo cannot be NULL, if you omit the NOT NULL it is obvious that the column is Nullable. We created Date of Birth column which have a data type of DATE. Then at last we created staff id which is varchar not null, and UNIQUE which is an index that this value has to be unique in order to be added to the database.
