@@ -67,3 +67,36 @@ CREATE TABLE Lecturer
 );
 ```
 We have created a table named Lecturer with Five columns. Id column represent that it is a type of an integer and also a PRIMARY KEY, but since we also want it to Auto Increment we added IDENTITY, if we want to pass the Valued to be added and seeds, we can open parantheses after it and pass those values. Then we created First Name and Last Name for which we used NVARCHAR data type with the maximum length of 50 characters, and aslo cannot be NULL, if you omit the NOT NULL it is obvious that the column is Nullable. We created Date of Birth column which have a data type of DATE. Then at last we created staff id which is varchar not null, and UNIQUE which is an index that this value has to be unique in order to be added to the database.
+
+## Insert Data into the Table Using SSMS
+- We can right click on the table we want to enter data in and can select Edit top 200 rows, and it will give us an editor where we can enter data and save it into the table.
+- If the table does not meet the rules that we set while creating, it will TRUNCATE the value and create a new row which will automatically change the Primary Key of that if the primary key is set to IDENTITY.
+
+## Insert Data into the Table Using Script
+- To insert the date in the table we use the keyword `INSERT INTO tablename`.
+- WHen inserting data in a table where we set up the Primary key to be Identity does not require to add value for it, because it will be done for you.
+- We also have to metion the name of the columns in after the table in parantheses, but if we omit the name of the columns and jump straight to the values, we have to follow the order of the values.
+- But if we use columns we can set the order based on our preference in the columns and then we can add based on the Columns order we set.
+Here is the example: -
+```
+INSERT INTO tableName
+(
+    col_1,
+    col_2,
+    col_3
+)
+VALUES
+(val_1.1, val_2.1, val_3.1),
+(val_1.2, val_2.2, val_3.2),
+(val_1.3, val_2.3, val_3.3);
+```
+Here is another way to do it:-
+```
+INSERT INTO tableName VALUES
+(val_1.1, val_2.1, val_3.1),
+(val_1.2, val_2.2, val_3.2),
+(val_1.3, val_2.3, val_3.3);
+```
+The only problem with this one is that if we are not specifying the column and we are omiiting the NULLABLE values it will throw an error. But if you mention those columns and then leave the values for those columns blank or omit them the script will run and sucesfully add the data. Make sure you are not leaving UNIQUE Key Constraints NULL because they can cause error since more than one holds the value NULL which breaks the rule of the key being UNIQUE.
+
+## Select Data from Tables - Simple Queries
