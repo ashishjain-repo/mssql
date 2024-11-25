@@ -100,3 +100,19 @@ INSERT INTO tableName VALUES
 The only problem with this one is that if we are not specifying the column and we are omiiting the NULLABLE values it will throw an error. But if you mention those columns and then leave the values for those columns blank or omit them the script will run and sucesfully add the data. Make sure you are not leaving UNIQUE Key Constraints NULL because they can cause error since more than one holds the value NULL which breaks the rule of the key being UNIQUE.
 
 ## Select Data from Tables - Simple Queries
+- `SELECT` is usd to Get the data from the database, and we also have to mention the name of the table.
+- We mention names of the Columns after SELECT to get the specific data from particular columns.
+- If we want all the columns to show instead of metioneing all the columns what we can do is omit the columns and add `*` in place of Columns.
+- Then we use `FROM` to tell the system which table we are using and then after from we just mention the name of the table.
+- Here is the example:-
+    ```
+    SELECT col1, col2 FROM table;
+    SELECT * FROM table;
+    ```
+- In MSSQL we can use `TOP(number of columns)` to get the first total number of column mentioned in the Table. This is how it will look like:-
+    ```
+    SELECT TOP(100) Col1, Col2
+    FROM table;
+    ```
+
+## Select Data from Tables - Adding Filters
