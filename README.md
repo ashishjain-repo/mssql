@@ -116,3 +116,17 @@ The only problem with this one is that if we are not specifying the column and w
     ```
 
 ## Select Data from Tables - Adding Filters
+- `WHERE` we use where caluse when we are filtering the data, this function is conditional and we have to specify what we are looking for. For example: `SELECT Id, Name FROM table WHERE Id = 2;`.
+- Make sure you use the accurate datatype when using the column. If the column container integer use interger to filter result, if column is a string use string.
+- We can also chain these Conditions using `AND` or `OR`. For example: `SELECT * FROM table WHERE Id = 2 OR Name = 'Jane';` or `SELECT * FROM table WHERE Gender = 'Male' AND Name = 'John';`.
+- We can also use Wildcard filter to look for specific data. We use `LIKE` and then the filter is the data we are looking for starts with or endswith or contains something that we have in our filter. The `%` is our wildcard operator. Here is the example: -
+    ```
+    SELECT * FROM table WHERE FirstName LIKE 'W%'; -- This is for Start with W and does not matter what is after
+    SELECT * FROM table WHERE FirstName LIKE '%W'; -- This is for End with W and does not matter what is before
+    SELECT * FROM table WHERE FirstName LIKE '%T%'; -- Here we are making sure that data we have should contains 'T' init.
+    ```
+- Using Where clause with Math Expressions or Logical Operators. Here is the example: -
+    ```
+    SELECT * FROM table WHERE Age > 20;
+    SELECT * FROM table WHERE Age < 60;
+    ```
