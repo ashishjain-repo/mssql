@@ -134,3 +134,26 @@ The only problem with this one is that if we are not specifying the column and w
     ```
 ## Select Data from Tables - Exporting Data
 - To export the data from the result set we can write a query based on what data we need and from the result set in the SSMS we can right click on it and can save it as .csv file.
+- We can also copy the Result set and can move it in Excel and then work with that data.
+- We can use CASE statements to implement logic, by which we can get the results based on the logic.
+- There are multiple uses of CASE statements: -
+    1. Conditional Output (Modify the output of a query based on specific conditions)
+    2. Derived Columns ( Create new columns in the query output based on conditions)
+    3. Filtering Data (Apply Conditions Dynamically in WHERE or HAVING clause)
+    4. Updating Data (Conditionally update rows in the table)
+    5. Aggregating Data (Using CASE with aggregate functions to group data conditionally)
+    6. Simplifying complex queries (Replace multiple IF statments or Joins with conditional logic)
+- Here is an example: -
+```
+SELECT FirstName
+, LastName
+, StaffId
+, CASE
+    WHEN StaffId IS NULL THEN 'Not Onboarded'
+    ELSE StaffId
+END
+FROM Lecturer;
+```
+We can also use Alias to edit the name of the table in the result set, not changing the name of the table in the database. We can use `AS` or `[]` and can pass the string for the Alias. For `AS` it is required to have quoted around if there is a space in the string.
+
+## Update Data in Tables
