@@ -157,3 +157,10 @@ FROM Lecturer;
 We can also use Alias to edit the name of the table in the result set, not changing the name of the table in the database. We can use `AS` or `[]` and can pass the string for the Alias. For `AS` it is required to have quoted around if there is a space in the string.
 
 ## Update Data in Tables
+- We can use UI to update data, by clicking on the Edit Top 200 rows on the table. This approach have its own pros and cons.
+- To update the data using script we use `UPDATE` then table name and then the keyword `SET` to change the value to.
+- `WHERE` clause is generally recommended when updateing data, unless you are planning on updating everything.
+- Here is the example: -
+```
+UPDATE tableName SET col1 = 'Some Data' WHERE col_id = 2;
+```
