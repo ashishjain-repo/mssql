@@ -129,4 +129,8 @@ The only problem with this one is that if we are not specifying the column and w
     ```
     SELECT * FROM table WHERE Age > 20;
     SELECT * FROM table WHERE Age < 60;
+    SELECT * FROM table WHERE Age <= 60;
+    SELECT * FROM table WHERE Age >= 60;
     ```
+## Select Data from Tables - Exporting Data
+- To export the data from the result set we can write a query based on what data we need and from the result set in the SSMS we can right click on it and can save it as .csv file.
