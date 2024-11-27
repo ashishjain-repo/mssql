@@ -164,3 +164,5 @@ We can also use Alias to edit the name of the table in the result set, not chang
 ```
 UPDATE tableName SET col1 = 'Some Data' WHERE col_id = 2;
 ```
+
+## Delete Data from the Tables
