@@ -166,3 +166,46 @@ UPDATE tableName SET col1 = 'Some Data' WHERE col_id = 2;
 ```
 
 ## Delete Data from the Tables
+- We can simply use the UI to delete the data in our tables. We can simply click on edit and edit those rows to removal and that will delete the data. But this works with the small data set.
+- When working on a large scale dataset we have to use the SQL queries to filter the data and then based on the filteration remove.
+- We use `DELETE FROM tablename WHERE column = someData`, this way we will be targetting a particular data that need to be removed.
+- It is not always we are going to be using `=` we can also delete multiple rows based on chained conditions or `<>` not equal to.
+
+## SQL Transactions
+- Transaction create a staging area for changes (CRUD).
+- In this staging state we manipulate the data, and if everything goes correctly the data changes, otherwise it rollbacks to the previous state before transaction.
+- To start the transaction we use `BEGIN TRANSACTION` then we have the multiple sql commands then we have `COMMIT` to confirm the chages, or `ROLLBACK` to undo.
+- A simple example:
+    ```
+    BEGIN TRANSACTION
+        DELETE FROM tableName WHERE column = somedata
+    COMMIT
+    ROLLBACK
+    ```
+When we run the first two commands the system delete the data from the table but it is not done yer, the transaction is still in the process, and now if we want to make those changes we will run the COMMIT, otherwise if we wants to undo the changes we will run the ROLLBACK command and the data will be restored.
+
+# Section 3
+## What are Relationships, Foreign Keys, and Normalization
+- Normalization is the process of removing, CRUD anomalies from data tables
+- This process leads to multiple tables that have relationships
+- Four main stages:
+    1. First Normal Form (1NF)
+    2. Second Normal Form (2NF)
+    3. Third Normal Form (3NF)
+    4. Boyce Cod Normal Form (BCNF)
+- Boyce Cod Normal Form
+    1. More Tables are introduced
+    2. All tables have Primary Keys
+    3. No redundancy in tables
+        1. Where there would be repeated data, we create a new table and make a reference with a relationship
+        2. We establish dependencies between tables
+    4. We have achieved Referential Integrity
+    5. We have removed all anomalies
+- What are relationships
+    1. A relationship is a situation that exists between two database tables when one table has data that references another table
+    2. Relationships allow relational databases to split and store data in different tables while linking data items using a Foreign Key
+    3. Replationships help to enforce Referential Integrity
+    4. Different Modalities
+        1. One to One - One record related to exactly one record in both tables
+        2. One to Many - One record is referenced many times in another table
+        3. Many to Many - Many records in multiple tables need to reference each other
