@@ -40,3 +40,21 @@ ADD FOREIGN KEY (JobTitleId) REFERENCES JobTitles(Id);
 ```
 In this we are adding a Foreign Key which is going to be the existing column now JobTitleId and the reference would be the Id Column in the JobTitle table.
 
+### Unique and Default constraints
+Unique constraint is used when we want a value in a table only occuring once, for example in the table Employee we might want an employee id and every employee should have a unique id. TO make that happen in the database we mark them as unique so when a value is being added our sql server will check if that value already exists, if not it will be added otherwise an error will occur. Let's alter the table and add that column with unique constraint.
+```
+ALTER TABLE Employee
+ADD EmployeeId VARCHAR(10) UNIQUE NOT NULL;
+```
+
+Default constraint is used when some of the input might not be available at that time, for example our employee table can have a EmploymentDate column and the date can be generated default whenever the employee is added, if the date is not provided in that creation, a default date will be given. So instead of it being null we are going to use the function called `GetDate` which return the current date based on computer time.
+```
+ALTER TABLE Employee
+ADD EmploymentDate DateTime2 DEFAULT GetDate();
+```
+
+### Drop Columns and Constraints
+
+
+
+
