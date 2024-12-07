@@ -54,7 +54,54 @@ ADD EmploymentDate DateTime2 DEFAULT GetDate();
 ```
 
 ### Drop Columns and Constraints
+We can also drop some columns or the constraint in the table. To achieve this we will use ALTER, and after that we will be using DROP and COLUMN keyword then the name of the column. Here is the example:
+```
+ALTER TABLE Employee
+DROP COLUMN DateOfBirth;
+```
+We can also change the datatype using the ALTER, because in DateOfBirth we are not looking for the time of birth but we used the `DATETIME2` datatype. We can do the following:
+```
+ALTER COLUMN DateOfBirth DATE;
+```
+To drop the constraint we have to make sure we have the name of the constraint, because if we do not set up the name of the contraint like keyname, SQL Server will automatically create one for us. Make sure to use that KeyName to drop it. Here is the example:
+```
+ALTER TABLE Employee
+DROP CONSTRAINT UQ__Employee__7AD04F105D8A6AB7;
+```
+To add the name of the constraint we can do this:
+```
+ALTER TABLE Employee
+ADD CONSTRAINT UQ_EmployeeId UNIQUE(EmployeeId);
+```
+This code implies that EMployeeId column already exists.
+
+# Section 3
+## Reading Data
+
+### Getting Started: SELECT Queries
+To read data from a table we use the keyword `SELECT` and then we mention that name of the columns and after we mention the keyword `FROM` to refer to the table that we want the data from, and after this we add the name of the table. To select all the data in the table, which means all the column and row we use this:
+```
+SELECT * FROM tableName;
+```
+Make sure you are connected to the database before running any SELECT operation.
+
+Since we are getting all the data from the table this could return a large dataset which might required more resources, and could be tedious to get the information which we are looking for. To limit the number of rows return we can add a filter which will return the only top number of rows. To perform this operation we use the function top with the total numbers of rows we would like to return `TOP(number)`. The query would look somthing like this:
+```
+SELECT TOP(100) * FROM tableName;
+```
+
+To select specific columns what we can do is instead of using `*` which means all, we can use the name of the columns that are in the table. Here is the example:
+```
+SELECT column1, column2 FROM tableName;
+```
+
+Since we are using AdventureWorks database this is the queries for that database that we just learned:
+```
+USE AdventureWorks2022;
+SELECT * FROM HumanResources.Employee;
+SELECT TOP(100) * FROM HumanResources.Employee;
+SELECT LoginId, jobTitle, HireDate FROM HumanResources.Employee;
+```
 
 
-
-
+### Filtering and Sorting Data
