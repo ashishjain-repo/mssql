@@ -146,3 +146,37 @@ SELECT * FROM HumanResources.Employee
 ORDER BY HireDate DESC;
 
 ```
+
+### Filtering with Wild Cards
+Wild card is a pattern of values that helps us filter the result based on that pattern. Upon using wild card the server return the dataset that matches the pattern that is provided, and it can return one to many rows. So if one column contains many names but for example we only want to search for the names that starts with John or first name is Jhon, we can use the following example:
+```
+SELECT * FROM employee
+WHERE name LIKE 'John%';
+```
+This is not the only way of doing it, we can also use the wild card in many ways to make different patterns. Here is the example for last name (Silva):-
+```
+SELECT * FROM employee
+WHERE name LIKE '%Silva';
+```
+Here is the example of the substring anywhere in the string, for example (Gavin) anywhere in the string:
+```
+SELECT * FROM employee
+WHERE name LIKE '%Gavin%';
+```
+
+Here is the example of the WIld Card with AdventureWorks database:
+```
+USE AdventureWorks2022;
+
+-- Anywhere in the string
+SELECT * FROM HumanResources.Employee
+WHERE JobTitle LIKE '%Marketing%';
+
+-- Starts with
+SELECT * FROM HumanResources.Employee
+WHERE JobTitle LIKE 'Quality%';
+
+-- Ends with
+SELECT * FROM HumanResources.Employee
+WHERE JobTitle LIKE '%Manager';
+```
