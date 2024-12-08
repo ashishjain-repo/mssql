@@ -105,3 +105,44 @@ SELECT LoginId, jobTitle, HireDate FROM HumanResources.Employee;
 
 
 ### Filtering and Sorting Data
+There are various methods that we can use to filter data, the very basic filtering methods would be `WHERE` clause, in which we mention that which column contains what and show the results based on that. For example we can look for in a table of Employee where there is a column salary and we would like to see where the salary is above 100,000, in this case we will use the WHERE clause. We can also use the conditional operations like `>, <, >=, <=, <>, =`.
+Here is the example:
+```
+SELECT * FROM Employee
+WHERE salary > 100000;
+```
+We can also pair the conditions with `AND` or `OR` conditions in the where clause. Here is the example:
+```
+SELECT * FROM Employee
+WHERE salary > 10000 AND position = 'Software Developer';
+```
+
+We can sort the data by using the `ORDER BY` clause in which we can mention the column which we would like to order based on, since this is not filtering it will return everything that is being asked in the SELECT unless we pair our select statement with WHERE clause. Here is the example:
+```
+SELECT * FROM employee
+ORDER BY HireDate;
+```
+The default behaviour of the ORDER BY is Ascending order but we can explicitly can tell the Server to make it descending by using `DESC` after the name of the column in the ORDER BY.
+
+Here is the code for the AdventureWorks database:
+```
+USE AdventureWorks2022;
+
+-- Filtering
+SELECT * FROM HumanResources.Employee
+WHERE JobTitle = 'Marketing Assistant';
+
+SELECT * FROM HumanResources.Employee
+WHERE BusinessEntityID = 20;
+
+SELECT * FROM HumanResources.Employee
+WHERE JobTitle = 'Marketing Assistant' AND Gender = 'M';
+
+-- Sorting
+SELECT * FROM HumanResources.Employee
+ORDER BY HireDate;
+
+SELECT * FROM HumanResources.Employee
+ORDER BY HireDate DESC;
+
+```
