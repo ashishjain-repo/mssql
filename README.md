@@ -180,3 +180,6 @@ WHERE JobTitle LIKE 'Quality%';
 SELECT * FROM HumanResources.Employee
 WHERE JobTitle LIKE '%Manager';
 ```
+
+### Combine Multiple Tables with JOINs
+In this example we are going to connect the two tables using Joins, we are using AdventureWorks database and we are using HumanResources Schema in it, we are going to be connection employee and department table together.
