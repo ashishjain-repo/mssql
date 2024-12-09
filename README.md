@@ -182,4 +182,21 @@ WHERE JobTitle LIKE '%Manager';
 ```
 
 ### Combine Multiple Tables with JOINs
-In this example we are going to connect the two tables using Joins, we are using AdventureWorks database and we are using HumanResources Schema in it, we are going to be connection employee and department table together.
+In this example we are going to connect the two tables using Joins, we are using AdventureWorks database and we are using HumanResources Schema in it, we are going to be connection employee and department table together. The easiest join we can make is `INNER JOIN` and in this join we join tables where their data matches, or easiest example would me Many-to-Many relationship tables, because in those table we have a table that joins two tables together it is also called Linking table, or bridge table. Here is the example with AdventureWorks database:
+```
+SELECT 
+	Emp.JobTitle [Job Title]
+,	Emp.HireDate [Hire Date]
+,	CASE
+		WHEN SalariedFlag > 0 THEN 'True'
+		ELSE 'False'
+	END AS [Paid Employee?]
+FROM HumanResources.Employee AS Emp
+INNER JOIN HumanResources.EmployeeDepartmentHistory AS Hist
+	ON Emp.BusinessEntityID = Hist.BusinessEntityID
+INNER JOIN HumanResources.Department AS Dep
+	ON Hist.DepartmentID = Dep.DepartmentID
+ORDER BY Dep.Name;
+```
+
+We have other joins as well which do not directly depend on the relationship between the data.
