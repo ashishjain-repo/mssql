@@ -199,4 +199,22 @@ INNER JOIN HumanResources.Department AS Dep
 ORDER BY Dep.Name;
 ```
 
-We have other joins as well which do not directly depend on the relationship between the data.
+We have other joins as well which do not directly depend on the relationship between the data. We are going to use Left Joins to achieve the results. The `LEFT JOIN` results in the giving priority to the left columns and if there is some values in the right then show the values otherwise priortize Left. This is the same case with `RIGHT JOIN` but the order is different the preference will be given to the Right table and if the Right Join the only last table the priority goes to itself. Here is the example with AdventureWorks database:
+```
+SELECT
+	Prod.Name
+,	Prod.ProductNumber
+,	Work.WorkOrderID
+,	Work.OrderQty
+,	Work.StockedQty
+,	Scrap.Name
+FROM Production.Product Prod
+INNER JOIN Production.WorkOrder Work
+	ON Work.ProductID = Prod.ProductID
+LEFT JOIN Production.ScrapReason Scrap
+	ON Scrap.ScrapReasonID = Work.ScrapReasonID;
+```
+
+### Union and UNION ALL
+
+
