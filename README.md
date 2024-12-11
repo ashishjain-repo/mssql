@@ -332,3 +332,45 @@ INNER JOIN Sales.SalesOrderHeader H
 GROUP BY P.FirstName, P.LastName
 ORDER BY MAX(H.TotalDue) DESC;
 ```
+
+# Section 4
+## More Read Query Concepts
+
+### Using Subqueries
+Sub query is a query inside a query. For this we have an example where we want to return a result set of avaergae number of vacations hours used by an empoyee. We can acheive this result by getting the average with one query and then using another query to show the vacation hour on that average. But the vacation hours may change in future and using literal values in the query is not very useful. We can acheive these results by adding that query that gives us the average in the WHERE clause. And we can put the query in the parantheses and the result return by the query will with numericals based on the column we choose and where clause will determine the result based on that. Here is an example:
+```
+SELECT
+	Emp.BusinessEntityID
+,	Emp.LoginID
+,	Emp.JobTitle
+,	Emp.VacationHours
+FROM HumanResources.Employee Emp
+WHERE Emp.VacationHours > 
+(
+	SELECT AVG(Emp.VacationHours)
+	FROM HumanResources.Employee Emp
+);
+```
+
+We can also find the average vacation hours based on the Jobtitle by doing a SELF JOIN and using a subquery in the JOIN statement. Here is the example:
+```
+SELECT 
+	Emp.BusinessEntityID
+,	Emp.LoginID
+,	Emp.JobTitle
+,	Emp.VacationHours
+,	Sub.[Average Vacation]
+FROM HumanResources.Employee Emp
+JOIN (
+		SELECT
+		JobTitle,
+		AVG(VacationHours) [Average Vacation]
+		FROM HumanResources.Employee
+		GROUP BY JobTitle
+) Sub
+	ON Emp.JobTitle = Sub.JobTitle
+	WHERE Emp.VacationHours > Sub.[Average Vacation] AND Emp.JobTitle = 'Accountant'
+	ORDER BY Emp.JobTitle;
+```
+
+Subqueries is a query nested inside another SQL query. It is used to retrieve data that will be used in the main query. Subquery can be placed anywhere, as long as the syntax and login align with the query requirments.
