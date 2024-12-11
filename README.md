@@ -240,4 +240,21 @@ INNER JOIN Person.Person Per
 	ON Per.BusinessEntityID = Cust.PersonID;
 ```
 
+### DISTINCT Versus GROUP BY
+We use `DISTINCT` keyword in the SELECT when we have a risk of having duplicate values, DISTINCT will clear up the duplicates and give you a clean data. If not used DISTINCT the query will run and the data will be shown as it is, could differ based on the realtionships. We also have to make sure when we are using data we have to use on the correct column, if used on column that can add the potential duplicates, for example DISTINCT on FirstName but also added LastName in select it will still show the duplicates, because now one firstName can have many last names and vice-versa. Here is the quick example with AdventureWorks database:
+```
+SELECT DISTINCT Per.FirstName
+FROM Sales.Customer Cust
+INNER JOIN Person.Person Per
+	ON Per.BusinessEntityID = Cust.PersonID;
+```
 
+When using DISTINCT it keeps the one unique data and eliminate the rest, but when using `GROUP BY` it kees track of the occurences. Since it keeps track of the data we can pair the GROUP BY with aggregate functions to get more out of the exisiting functionallity of GROUP BY. When using GROUP BY if the column that is added in the GROUP BY is not in the select statment it will throw an error, so make sure to use the column in the select statment or with an aggregate function to use GROUP BY on it. Here is the example with AdventureWorks database:
+```
+SELECT Per.FirstName
+FROM Sales.Customer Cust
+INNER JOIN Person.Person Per
+	ON Per.BusinessEntityID = Cust.PersonID
+GROUP BY Per.FirstName
+ORDER BY Per.FirstName;
+```
