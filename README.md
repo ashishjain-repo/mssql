@@ -374,3 +374,24 @@ JOIN (
 ```
 
 Subqueries is a query nested inside another SQL query. It is used to retrieve data that will be used in the main query. Subquery can be placed anywhere, as long as the syntax and login align with the query requirments.
+
+### Common table expression
+Common table expression CTE can also be called Temporary Named Result Set, these are not temporary tables but they names result set that you can reference withing SELECT, INSERT, UPDATE, DELETE statment. It improves query readabillity and simplifies complex operations. To create a CTE we use the `WITH` then the name of this expression then the name of the columns which are optional. Then `AS` then the SELECT statement after defining the CTE it is necessary to use the query since the scope of CTE is only for the time that they are being used. They are not stored in the storage for later usage. Here is the example:
+```
+-- Define the CTE expression name and column list.
+WITH Sales_CTE
+AS
+-- Define the CTE query.
+(
+	SELECT SalesPersonId, SalesOrderID, YEAR(OrderDate) [Sales Year]
+	FROM Sales.SalesOrderHeader
+	WHERE SalesPersonID IS NOT NULL
+)
+-- Define the outer query referencing CTE name.
+SELECT 
+	SalesPersonID
+,	COUNT(SalesOrderID) AS TotalSales
+,	[Sales Year]
+FROM Sales_CTE
+GROUP BY [Sales Year], SalesPersonID;
+```
