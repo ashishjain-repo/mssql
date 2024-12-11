@@ -258,3 +258,54 @@ INNER JOIN Person.Person Per
 GROUP BY Per.FirstName
 ORDER BY Per.FirstName;
 ```
+
+### Aggregate functions
+Aggregate functions are type of functions that perform operation on multiple rows to return a single result. Aggregate itself means to combine multiple values into a single summary value. The `COUNT` function count the occurences of the rows, and here is the example of the total number of customer counted in our table:
+```
+-- Find the numbers of Customers
+SELECT COUNT(Per.FirstName)
+FROM Sales.Customer Cust
+INNER JOIN Person.Person Per
+	On Per.BusinessEntityID = Cust.PersonID;
+```
+Now we are going to use the COUNT function to count the occurences of one name, and this query will return the total number of time that one name or data is reoccured. We can also pair this by `HAVING` clause which can help with the conditional logic in an aggregate column:
+```
+SELECT Per.FirstName [First Name], COUNT(Per.FirstName) [Total Occurence]
+FROM Sales.Customer Cust
+INNER JOIN Person.Person Per
+	ON Per.BusinessEntityID = Cust.PersonID
+GROUP BY Per.FirstName
+HAVING COUNT(Per.FirstName) > 1
+ORDER BY Per.FirstName;
+```
+We cannot use the WHERE cluse in this because WHERE applies to the column that are in the SELECT clause not a part of the Aggregate function.
+
+Now we are going to be looking at the function to add the values or Sum them up using `SUM` function. This will add the value from each row and return the sum of the numbers. Same way we count the average using the `AVG` function. We also have function to get the minimum value in the column using `MIN` function and maximum value using `MAX` function. Here is the example:
+```
+SELECT 
+	SUM(TotalDue) [Total Sales Amount]
+,	AVG(TotalDue) [Average Sales Amount]
+,	MIN(TotalDue) [Minimum Sales Amount]
+,	MAX(TotalDue) [Maximum Sales Amount]
+FROM Sales.SalesOrderHeader;
+```
+
+Now we are going to add multiple tables together and gather all the data of the sales and see the sales individually done by the salesman and perform aggregate functions on the data:
+```
+SELECT
+	P.FirstName
+,	P.LastName
+,	SUM(H.TotalDue) [Total Sales]
+,	AVG(H.TotalDue)	[Average Sales Amount]
+,	MIN(H.TotalDue) [Lowest Sale Amount]
+,	MAX(H.TotalDue) [Highest Sale Amount]
+,	COUNT(H.TotalDue) [Number of Sales]
+FROM Sales.SalesPerson S
+INNER JOIN Person.Person P
+	ON S.BusinessEntityID = P.BusinessEntityID
+INNER JOIN Sales.SalesOrderHeader H
+	ON H.SalesPersonID = S.BusinessEntityID
+GROUP BY P.FirstName, P.LastName
+ORDER BY MAX(H.TotalDue) DESC;
+```
+### String Manipulation
