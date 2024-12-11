@@ -309,3 +309,26 @@ GROUP BY P.FirstName, P.LastName
 ORDER BY MAX(H.TotalDue) DESC;
 ```
 ### String Manipulation
+We are going to use String Manipulation functions in the previous query that we used for Aggregate functions and make the Full Name appear and currency with formatted values. 
+
+To join the two columns firstName and lastname we can use the function called `CONCAT` and concatenate the two string together, or use the `+` add sign and join the string. If we are going to use the `CONCAT` function and to pass the space in the middle we can add the gap by using the single quotes with a one character empty space in it, same applies for the sign just seperated byt the `+` instead of commas.
+
+Now our numbers in the results are not formatted and it is hard to read and make the meaning out of those number. We can use the function called `FORMAT` and pass two parameters, first the value itself or column and second the way we want it to be formatted. Since we are dealing with currency here, the option for that is character `'C'`. After applying this to our Total sales column the results start with `$` and there are only 2 digits after decmial and the values are rounded to the nearest hunderd. We also have function called `TRIM` which trims the empty spaces from both ends, similarly we have `LTRIM` for extra space on left and `RTRIM` to do that same on the right.
+
+Here is the code:
+```
+SELECT
+	CONCAT(P.FirstName,' ',P.LastName) [Full Name]
+,	FORMAT(SUM(H.TotalDue),'C') [Total Sales]
+,	FORMAT(AVG(H.TotalDue), 'C') [Average Sales Amount]
+,	FORMAT(MIN(H.TotalDue), 'C') [Lowest Sale Amount]
+,	FORMAT(MAX(H.TotalDue), 'C') [Highest Sale Amount]
+,	COUNT(H.TotalDue) [Number of Sales]
+FROM Sales.SalesPerson S
+INNER JOIN Person.Person P
+	ON S.BusinessEntityID = P.BusinessEntityID
+INNER JOIN Sales.SalesOrderHeader H
+	ON H.SalesPersonID = S.BusinessEntityID
+GROUP BY P.FirstName, P.LastName
+ORDER BY MAX(H.TotalDue) DESC;
+```
