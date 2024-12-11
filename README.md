@@ -215,6 +215,29 @@ LEFT JOIN Production.ScrapReason Scrap
 	ON Scrap.ScrapReasonID = Work.ScrapReasonID;
 ```
 
-### Union and UNION ALL
+### UNION and UNION ALL
+`UNION` combines the result of two queries and removes duplicates, showing only unique rows. On that other hand `UNION ALL` combines the result of two queries but include all rows allowing duplicates.
+Here is the code for both UNION and UNION ALL with AdventureWorks database:
+```
+SELECT Per.FirstName 
+FROM HumanResources.Employee Emp
+INNER JOIN Person.Person Per 
+	ON Emp.BusinessEntityID = Per.BusinessEntityID
+UNION
+SELECT Per.FirstName
+FROM Sales.Customer Cust
+INNER JOIN Person.Person Per
+	ON Per.BusinessEntityID = Cust.PersonID;
+
+SELECT Per.FirstName 
+FROM HumanResources.Employee Emp
+INNER JOIN Person.Person Per 
+	ON Emp.BusinessEntityID = Per.BusinessEntityID
+		UNION ALL
+SELECT Per.FirstName
+FROM Sales.Customer Cust
+INNER JOIN Person.Person Per
+	ON Per.BusinessEntityID = Cust.PersonID;
+```
 
 
